@@ -1,0 +1,38 @@
+---
+title: "Examine Life Expectancy"
+author: "Hao Ren"
+date: "2022-01-05"
+output:
+html_document:
+df_print: paged
+urlcolor: blue
+---
+
+# Abstract
+
+Here, I re-examine the analysis of Oeppen and Vaupel (2002).
+
+# Analysis
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(tidyverse)
+library(gapminder)
+```
+
+```{r}
+data("gapminder_unfiltered")
+nrow(gapminder_unfiltered)
+```
+
+```{r}
+gapminder_unfiltered |>
+  group_by(year)|>
+  filter(lifeExp == max(lifeExp))|>
+  ungroup()|>
+select(year, country, lifeExp) ->
+  sumdat
+```
